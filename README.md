@@ -2,7 +2,7 @@
 This class is simple lagrange interpolation fomula making class. 
 If the number is added about 30, it is possible to generate an error.
 
-## Useage
+## Usage
 ``` c++
 LagrangeInterpolationInt<uint64_t> lii;
 
