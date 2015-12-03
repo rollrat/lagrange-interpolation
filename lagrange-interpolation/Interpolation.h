@@ -29,7 +29,7 @@ Author:
 namespace Utility {
 	
 	template<typename type>
-	class LagrangeInterpolation // ¶ó±×¶ûÁÖ ´ÙÇ×½Ä, º¸°£¹ı
+	class LagrangeInterpolation // ë¼ê·¸ë‘ì£¼ ë‹¤í•­ì‹, ë³´ê°„ë²•
 	{
 		List<type> tar;	// x
 		List<type> val;	// y
@@ -59,7 +59,7 @@ namespace Utility {
 			{
 				type *tmpfacto = new type[tar.Size()];
 
-				// ÇöÀç ÅëÇÕ °è¼ö°ö °è»ê
+				// í˜„ì¬ í†µí•© ê³„ìˆ˜ê³± ê³„ì‚°
 				double mul = 1.0f;
 				for (int j = 0; j < tar.Size(); j++)
 				{
@@ -72,39 +72,39 @@ namespace Utility {
 				mul = val_arr[i] / mul;
 				tmpfacto[0] = 1;
 
-				// ÀÎ¼öºĞÇØ½Ä °è¼ö °è»ê
+				// ì¸ìˆ˜ë¶„í•´ì‹ ê³„ìˆ˜ ê³„ì‚°
 				for (int j = 0, pure = 1; j < tar.Size(); j++)
 				{
 					if (i != j)
 					{
-						// 3x+4 ¶ó´Â ½ÄÀÌ ÀÖ´Ù°í ÇÏ¸é
-						// 3x^2+4x+4 À¸·Î ¹Ù²Û´Ù°í »ı°¢ÇÏ¸é µÊ(»ó¼öÇ× Á¸Àç)
+						// 3x+4 ë¼ëŠ” ì‹ì´ ìˆë‹¤ê³  í•˜ë©´
+						// 3x^2+4x+4 ìœ¼ë¡œ ë°”ê¾¼ë‹¤ê³  ìƒê°í•˜ë©´ ë¨(ìƒìˆ˜í•­ ì¡´ì¬)
 						for (int k = pure - 1; k >= 0; k--)
 						{
 							tmpfacto[k+1] = tmpfacto[k];
 						}
 
-						// 3x^2+4x+0 (»ó¼öÇ× »èÁ¦)
+						// 3x^2+4x+0 (ìƒìˆ˜í•­ ì‚­ì œ)
 						tmpfacto[0] = 0;
 
-						// 3x+4¿¡¼­ x-3À» °öÇÏ´Â °æ¿ì¿£
+						// 3x+4ì—ì„œ x-3ì„ ê³±í•˜ëŠ” ê²½ìš°ì—”
 						//  |3x^2 + 4x + 0
 						// +|      -9x  -12
 						//  --------------
 						//   3x^2  -5x  -12
-						// ·Î °è»êµÈ´Ù.
-						// Áï, nÂ÷ ´ÙÇ×½ÄÀ» ¸¸µé·Á¸é n-1¹ø °è»êÇÏ¸é µÈ´Ù.
+						// ë¡œ ê³„ì‚°ëœë‹¤.
+						// ì¦‰, nì°¨ ë‹¤í•­ì‹ì„ ë§Œë“¤ë ¤ë©´ n-1ë²ˆ ê³„ì‚°í•˜ë©´ ëœë‹¤.
 						for (int k = 0; k < pure; k++)
 						{
 							tmpfacto[k] += tmpfacto[k + 1] * -tar_arr[j];
 						}
 
-						// °è¼ö À§Ä¡ ex) pure°¡ 1ÀÌ¸é xÀÇ °è¼ö¸¦ 3ÀÌ¸é x^3ÀÇ °è¼ö¸¦ °¡¸®Å´
+						// ê³„ìˆ˜ ìœ„ì¹˜ ex) pureê°€ 1ì´ë©´ xì˜ ê³„ìˆ˜ë¥¼ 3ì´ë©´ x^3ì˜ ê³„ìˆ˜ë¥¼ ê°€ë¦¬í‚´
 						pure++;
 					}
 				}
 
-				// ÅëÇÕ´ÙÇ×½Ä¿¡ ´õÇÑ´Ù.
+				// í†µí•©ë‹¤í•­ì‹ì— ë”í•œë‹¤.
 				for (int k = 0; k < tar.Size(); k++)
 				{
 					facto[k] += tmpfacto[k] * mul;
@@ -115,7 +115,7 @@ namespace Utility {
 			
 			WStringBuilder wsb;
 
-			// ½Ä ¸¸µé±â
+			// ì‹ ë§Œë“¤ê¸°
 			for (int k = tar.Size() - 1; k >= 0; k--)
 			{
 				wsb.Append(WString(facto[k]));
@@ -211,7 +211,7 @@ namespace Utility {
 	};
 	
 	template<typename type>
-	class LagrangeInterpolationInt // ¶ó±×¶ûÁÖ ´ÙÇ×½Ä, º¸°£¹ı(Á¤¼öÇü)
+	class LagrangeInterpolationInt // ë¼ê·¸ë‘ì£¼ ë‹¤í•­ì‹, ë³´ê°„ë²•(ì •ìˆ˜í˜•)
 	{
 
 		class VisualizeFraction
@@ -271,7 +271,7 @@ namespace Utility {
 
 			VisualizeFraction operator+(const VisualizeFraction& refer)
 			{
-                type lcm = this->lcm(abs(refer.lo), abs(lo));
+				type lcm = this->lcm(abs(refer.lo), abs(lo));
 				return VisualizeFraction(hi * lcm / lo + refer.hi * lcm / refer.lo, lcm);
 			}
 
@@ -371,7 +371,7 @@ namespace Utility {
 				for (int j = 0; j < tar.Size(); j++)
 					tmpfacto[j] = new VisualizeFraction;
 
-				// ÇöÀç ÅëÇÕ °è¼ö°ö °è»ê
+				// í˜„ì¬ í†µí•© ê³„ìˆ˜ê³± ê³„ì‚°
 				VisualizeFraction mul(1);
 				for (int j = 0; j < tar.Size(); j++)
 				{
@@ -385,39 +385,39 @@ namespace Utility {
 				mul = mul * val_arr[i];
 				*tmpfacto[0] = 1;
 
-				// ÀÎ¼öºĞÇØ½Ä °è¼ö °è»ê
+				// ì¸ìˆ˜ë¶„í•´ì‹ ê³„ìˆ˜ ê³„ì‚°
 				for (int j = 0, pure = 1; j < tar.Size(); j++)
 				{
 					if (i != j)
 					{
-						// 3x+4 ¶ó´Â ½ÄÀÌ ÀÖ´Ù°í ÇÏ¸é
-						// 3x^2+4x+4 À¸·Î ¹Ù²Û´Ù°í »ı°¢ÇÏ¸é µÊ(»ó¼öÇ× Á¸Àç)
+						// 3x+4 ë¼ëŠ” ì‹ì´ ìˆë‹¤ê³  í•˜ë©´
+						// 3x^2+4x+4 ìœ¼ë¡œ ë°”ê¾¼ë‹¤ê³  ìƒê°í•˜ë©´ ë¨(ìƒìˆ˜í•­ ì¡´ì¬)
 						for (int k = pure - 1; k >= 0; k--)
 						{
 							*tmpfacto[k+1] = *tmpfacto[k];
 						}
 
-						// 3x^2+4x+0 (»ó¼öÇ× »èÁ¦)
+						// 3x^2+4x+0 (ìƒìˆ˜í•­ ì‚­ì œ)
 						*tmpfacto[0] = 0;
 
-						// 3x+4¿¡¼­ x-3À» °öÇÏ´Â °æ¿ì¿£
+						// 3x+4ì—ì„œ x-3ì„ ê³±í•˜ëŠ” ê²½ìš°ì—”
 						//  |3x^2 + 4x + 0
 						// +|      -9x  -12
 						//  --------------
 						//   3x^2  -5x  -12
-						// ·Î °è»êµÈ´Ù.
-						// Áï, nÂ÷ ´ÙÇ×½ÄÀ» ¸¸µé·Á¸é n-1¹ø °è»êÇÏ¸é µÈ´Ù.
+						// ë¡œ ê³„ì‚°ëœë‹¤.
+						// ì¦‰, nì°¨ ë‹¤í•­ì‹ì„ ë§Œë“¤ë ¤ë©´ n-1ë²ˆ ê³„ì‚°í•˜ë©´ ëœë‹¤.
 						for (int k = 0; k < pure; k++)
 						{
 							*tmpfacto[k] = *tmpfacto[k] + *tmpfacto[k + 1] * -tar_arr[j];
 						}
 
-						// °è¼ö À§Ä¡ ex) pure°¡ 1ÀÌ¸é xÀÇ °è¼ö¸¦ 3ÀÌ¸é x^3ÀÇ °è¼ö¸¦ °¡¸®Å´
+						// ê³„ìˆ˜ ìœ„ì¹˜ ex) pureê°€ 1ì´ë©´ xì˜ ê³„ìˆ˜ë¥¼ 3ì´ë©´ x^3ì˜ ê³„ìˆ˜ë¥¼ ê°€ë¦¬í‚´
 						pure++;
 					}
 				}
 
-				// ÅëÇÕ´ÙÇ×½Ä¿¡ ´õÇÑ´Ù.
+				// í†µí•©ë‹¤í•­ì‹ì— ë”í•œë‹¤.
 				for (int k = 0; k < tar.Size(); k++)
 				{
 					*facto[k] = *facto[k] + *tmpfacto[k] * mul;
@@ -430,7 +430,7 @@ namespace Utility {
 			
 			WStringBuilder wsb;
 
-			// ½Ä ¸¸µé±â
+			// ì‹ ë§Œë“¤ê¸°
 			for (int k = tar.Size() - 1; k >= 0; k--)
 			{
 				wsb.Append(**facto[k]);
