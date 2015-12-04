@@ -1,6 +1,6 @@
 # lagrange-interpolation
 This class is simple lagrange interpolation fomula making class. 
-If the number is added about 30, it is possible to generate an error.
+If the number is added more than 30, it is possible to generate an error.
 
 ## Usage
 ``` c++
